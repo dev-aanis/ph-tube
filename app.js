@@ -1,7 +1,14 @@
 const categoryButtonContainer = document.getElementById('categoryButtonContainer');
 const cardPostContainer = document.getElementById('cardPostContainer');
 const errorElement = document.getElementById('errorElement');
+const sortButton = document.getElementById('sortButton');
 let selectedCategory = 1000;
+let sortByView = false;
+
+sortButton.addEventListener('click', () => {
+    sortByView = true;
+    fetchDataByCategories(selectedCategory, sortByView)
+})
 
 const fetchCategory = () =>{
     const url = 'https://openapi.programming-hero.com/api/videos/categories'
@@ -12,14 +19,21 @@ const fetchCategory = () =>{
                 // console.log(card);
                 const catBtn = document.createElement('button');
                 catBtn.innerText = card.category;
-                catBtn.classList='bg-[#25252526] py-2 px-2 lg:px-5 rounded-lg text-base font-medium'
-                catBtn.addEventListener('click', () => fetchDataByCategories(card.category_id))
+                catBtn.classList='my-btn bg-[#25252526] py-2 px-2 lg:px-5 rounded-lg text-base font-medium'
+                catBtn.addEventListener('click', () => {
+                    fetchDataByCategories(card.category_id)
+                    const allButton = document.querySelectorAll('.my-btn')
+                    for(const btn of allButton){
+                        btn.classList.remove('bg-[#FF1F3D]', 'text-white')
+                    }
+                    catBtn.classList.add('bg-[#FF1F3D]', 'text-white')
+                })
                 categoryButtonContainer.appendChild(catBtn)
             });
         })
 }
 
-const fetchDataByCategories = (catId) =>{
+const fetchDataByCategories = (catId, sortByView) =>{
     // console.log(catId);
     selectedCategory = catId;
     const url = `https://openapi.programming-hero.com/api/videos/category/${catId}`
@@ -27,6 +41,15 @@ const fetchDataByCategories = (catId) =>{
         .then((res) => res.json())
         .then(({data}) =>{
             // console.log(data);
+            if(sortByView){
+                data.sort((a,b) =>{
+                    const totalViewsStrFirst = a.others?.views;
+                    const totalViewsStrSecond = b.others?.views;
+                    const totalViewsFirstNumber = parseFloat(totalViewsStrFirst.replace('k', '')) || 0;
+                    const totalViewsSecondNumber = parseFloat(totalViewsStrSecond.replace('k'), '') || 0;
+                    return totalViewsSecondNumber - totalViewsFirstNumber;
+                })
+            }
             if(data.length === 0){
                 errorElement.classList.remove('hidden')
             }else{
@@ -46,7 +69,7 @@ const fetchDataByCategories = (catId) =>{
                 <div class="flex mt-5">
                     <img class="w-[40px] h-[40px] rounded-full mr-3" src="${video.authors[0].profile_picture}" alt="">
                     <div>
-                        <h6 class="text-sm font-bold w-[245px]">${video.title}</h6>
+                        <h6 class="text-base font-bold w-[245px]">${video.title}</h6>
                         <div class="flex items-center">
                             <p class="mr-2">${video.authors[0].profile_name}</p>
                             ${verifiedBadge}
@@ -63,4 +86,4 @@ const fetchDataByCategories = (catId) =>{
 
 
 fetchCategory()
-fetchDataByCategories(selectedCategory)
+fetchDataByCategories(selectedCategory, sortByView)
