@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Tube</title>
+    <!--Daisy & Tailwind Css-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--Daisy & Tailwind Css-->
+</head>
+<body class="max-w-[1200px] mx-auto">
+    <header>
+        <nav class="flex justify-around lg:justify-between mt-4 lg:mt-8">
+            <img  src="Logo.png" alt="">
+            <button id="sortButton" class="bg-[#25252526] py-1 lg:py-3 px-1 lg:px-5 rounded-lg text-sm lg:text-lg font-medium">Sort By View</button>
+            <button class="py-1 lg:py-3 px-1 lg:px-5 bg-[#FF1F3D] text-sm lg:text-lg font-medium text-white rounded-lg">Blog</button>
+        </nav>
+        <hr class="my-3 lg:my-8">
+        <section class="justify-center items-center text-center flex-col">
+            <div id="categoryButtonContainer" class="space-x-1 lg:space-x-4 mb-10">
+                <!-- <button class="bg-[#25252526] py-2 px-5 rounded-lg text-base font-medium">All</button>
+                <button class="bg-[#25252526] py-2 px-5 rounded-lg text-base font-medium">Music</button>
+                <button class="bg-[#25252526] py-2 px-5 rounded-lg text-base font-medium">Comedy</button>
+                <button class="bg-[#25252526] py-2 px-5 rounded-lg text-base font-medium">Drawing</button> -->
+            </div>
+        </section>
+        <!--......................................-->
+        <section class="lg:mt-12 mt-6">
+            <div id="errorElement" class="mt-10 lg:mt-24 hidden">
+                <img class="mx-auto" src="Icon.png" alt="">
+                <h1 class="text-3xl mt-3 text-slate-600 text-center">Opps! This category contains Nothing!</h1>
+            </div>
+        </section>
+        <!--......................................-->
+    </header>
+    <main>
+        <section id="cardPostContainer" class="gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <!-- <div>
+                <img class="w-[290px]" src="Rectangle 1.png" alt="">
+                <div class="flex mt-5">
+                    <img class="w-[40px] h-[40px] mr-3" src="Ellipse 1.png" alt="">
+                    <div>
+                        <h6 class="text-sm font-bold w-[245px]">Building a Winning UX Strategy Using the Kano Model</h6>
+                        <div class="flex">
+                            <p class="mr-2">Awlad Hossain</p>
+                            <img src="badge.png" alt="">
+                        </div>
+                        <p>91k views</p>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+    </main>
+    <footer></footer>
+    <script src="app.js"></script>
+</body>
+</html>
